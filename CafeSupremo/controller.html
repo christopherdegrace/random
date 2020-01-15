@@ -8,6 +8,27 @@
         var SCS = {
             sitePrefix: '/CafeSupremo/'
         };
+
+        //custom controller
+
+        SCS.preInitRendering = function() {
+            // List additional site prefixes here.  All sitePrefix values MUST start and end with a '/' character.
+            var additionalSitePrefixes = [
+                '', '/cafesupremo/'
+            ];
+
+            // Determine if the actual browser URL matches one of the additional site prefixes
+            var pageUrl = decodeURI(window.location.pathname);
+            var i, prefix;
+            for (i = 0; i < additionalSitePrefixes.length; i++) {
+                prefix = additionalSitePrefixes[i];
+                if (pageUrl.startsWith(prefix) || (pageUrl === prefix.slice(0, -1))) {
+                    // If we find a match, set the global site prefix variable
+                    SCS.sitePrefix = prefix;
+                    break;
+                }
+            }
+        };
     </script>
     <script src="/CafeSupremo/_sitesclouddelivery/renderer/controller.js"></script>
 </head>
